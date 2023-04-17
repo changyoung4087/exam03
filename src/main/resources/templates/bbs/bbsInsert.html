@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>게시판</title>
+    </head>
+    <body>
+        <th:block><h1>게시글 등록</h1></th:block>
+        <form method="post" th:action="@{/bbs/bbsInsert}" th:object="${bbsParam}">
+        <div th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+            <button type="submit">등록</button>
+            <button type="button" th:onclick="location.href='/bbs'">뒤로가기</button>
+            <dl>
+                <dt>제목</dt>
+                <dd>
+                    <input type="text" name="bbsTitle" th:field="*{bbsTitle}">
+                    <div th:each="err : ${#fields.errors('bbsTitle')}" th:text="${err}"></div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>내용</dt>
+                <dd>
+                    <textarea name="bbsContent" th:field="*{bbsContent}"></textarea>
+                    <div th:each="err : ${#fields.errors('bbsContent')}" th:text="${err}"></div>
+                </dd>
+            </dl>
+        </form>
+    </body>
+</html>
